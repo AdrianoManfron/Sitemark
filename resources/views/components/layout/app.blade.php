@@ -11,8 +11,6 @@
     <title>{{ config('app.name') }}</title>
 </head>
 <body class="bg-background-primary h-full">
-    <h1 class="font-bold text-3xl text-content-primary">
-        Hello World!!!
-    </h1>
+    {{ $slot }}
 </body>
 </html>
