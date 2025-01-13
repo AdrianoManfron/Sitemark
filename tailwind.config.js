@@ -47,7 +47,8 @@ export default {
                 'content-primary': '#FFFFFF',
                 'content-secondary': '#A3A3A3',
                 'content-tertiary': '#696663',
-                'content-inverse': '#0A0908'
+                'content-inverse': '#0A0908',
+                'orange': '#ED712E'
             },
             borderColor: {
                 'primary': '#161412',

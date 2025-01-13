@@ -9,7 +9,7 @@
             </div>
             <x-form :route="route('register')" post id="register-form">
                 <h1 class="text-heading-small leading-heading-small font-bold text-content-primary pb-5"><span class="border-b-2 border-orange">Cr</span>iar conta</h1>
-                <div class="flex w-full">
+                <div class="flex w-full gap-2">
                     <x-label name="Nome" class="flex-1">
                         <x-input name="name" placeholder="Digite o seu nome" value="{{ old('name') }}" />
                     </x-label>
@@ -27,9 +27,9 @@
                     <x-input name="password" type="password" placeholder="Crie sua senha" />
                 </x-label>
             </x-form>
-            <x-button type="submit" form="register-form">Criar conta</x-button>
+            <x-button primary type="submit" form="register-form">Criar conta</x-button>
             <div class="flex text-paragraph-medium leading-paragraph-medium text-content-secondary gap-2">
-                Já tem cadastro? <x-a :href="route('login')">Acessar conta</x-a>
+                Já tem cadastro? <x-a default :href="route('login')">Acessar conta</x-a>
             </div>
         </section>
     </main>

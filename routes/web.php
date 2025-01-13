@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -16,4 +17,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/logout', LogoutController::class)->name('logout');
     Route::get('/', DashboardController::class)->name('dashboard');
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    // Route::put('/profile', [ProfileController::class, 'update']);
 });

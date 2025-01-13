@@ -10,7 +10,7 @@
     @vite('resources/css/app.css')
     <title>{{ config('app.name') }}</title>
 </head>
-<body class="bg-background-primary h-full">
+<body class="bg-primary h-full">
     {{ $slot }}
 </body>
 </html>

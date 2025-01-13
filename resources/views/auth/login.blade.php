@@ -16,9 +16,9 @@
                     <x-input name="password" type="password" placeholder="Insira sua senha" />
                 </x-label>
             </x-form>
-            <x-button type="submit" form="login-form">Acessar conta</x-button>
+            <x-button primary type="submit" form="login-form">Acessar conta</x-button>
             <div class="flex text-paragraph-medium leading-paragraph-medium text-content-secondary gap-2">
-                Não tem cadastro? <x-a :href="route('register')">Criar conta</x-a>
+                Não tem cadastro? <x-a default :href="route('register')">Criar conta</x-a>
             </div>
         </section>
     </main>
