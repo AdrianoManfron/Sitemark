@@ -17,8 +17,14 @@ class LinkController extends Controller
         /** @var User $user */
         $user = auth()->user();
 
+        $data = $request->validated();
+
+        if ($file = $request->poster) {
+            $data['poster'] = $file->store('poster');
+        }
+
         $user->links()
-            ->create($request->validated());
+            ->create($data);
 
         return to_route('dashboard');
     }
