@@ -8,36 +8,38 @@
                 <h1 class="text-heading-small leading-heading-small font-bold text-content-primary py-5"><span class="border-b-2 border-orange">Pe</span>rfil</h1>
                 <div class="flex justify-center items-center gap-4">
                     <x-a :href="route('dashboard')" back>Voltar</x-a>
-                    <x-button primary>Salvar</x-button>
+                    <x-button primary form="edit-profile-form">Salvar</x-button>
                 </div>
             </header>
-            <div class="w-full flex flex-col justify-center items-center gap-4 h-full">
-                <div class="w-full flex gap-8 h-full">
-                    <div class="w-3/5">
-                        <div class="flex w-full gap-2">
-                            <x-label name="Nome" class="flex-1">
-                                <x-input name="name" placeholder="Digite o seu nome" value="{{ old('name', $user->name) }}" />
+            <div class="w-full flex flex-col pt-10 items-center gap-4 h-full">
+                <x-form :route="route('profile')" put id="edit-profile-form" enctype="multipart/form-data">
+                    <div class="w-full flex gap-8 h-full">
+                        <div class="w-3/5">
+                            <div class="flex w-full gap-2">
+                                <x-label name="Nome" class="flex-1">
+                                    <x-input name="name" placeholder="Digite o seu nome" value="{{ old('name', $user->name) }}" />
+                                </x-label>
+                                <x-label name="Sobrenome" class="flex-1">
+                                    <x-input name="lastname" placeholder="Digite o seu sobrenome" value="{{ old('lastname', $user->lastname) }}" />
+                                </x-label>
+                            </div>
+                            <x-label name="E-mail">
+                                <x-input name="email" placeholder="Digite o seu email" value="{{ old('email', $user->email) }}" />
                             </x-label>
-                            <x-label name="Sobrenome" class="flex-1">
-                                <x-input name="lastname" placeholder="Digite o seu sobrenome" value="{{ old('lastname', $user->lastname) }}" />
+                            <x-label name="Bio">
+                                <x-textarea name="description" value="{{ old('description', $user->description) }}" />
                             </x-label>
                         </div>
-                        <x-label name="E-mail">
-                            <x-input name="email" placeholder="Digite o seu email" value="{{ old('email', $user->email) }}" />
-                        </x-label>
-                        <x-label name="Bio">
-                            <x-textarea name="description" value="{{ old('description') }}" />
-                        </x-label>
+                        <div class="w-2/5 flex flex-col items-center gap-2">
+                            <x-img src="/storage/{{ $user->photo }}" alt="Foto do Perfil" />
+                            <label for="avatar" class="flex items-center gap-2 text-label-small leading-label-small text-content-primary cursor-pointer">
+                                <x-icons.arrow-up class="w-4 h-4" />
+                                Substituir imagem
+                                <input type="file" name="photo" id="avatar" class="hidden" />
+                            </label>
+                        </div>
                     </div>
-                    <div class="w-2/5 flex flex-col items-center gap-2">
-                        <x-img src="/storage/" alt="Foto do Perfil" />
-                        <label for="avatar" class="flex items-center gap-2 text-label-small leading-label-small text-content-primary cursor-pointer">
-                            <x-icons.arrow-up class="w-4 h-4" />
-                            Substituir imagem
-                            <input type="file" name="photo" id="avatar" class="hidden" />
-                        </label>
-                    </div>
-                </div>
+                </x-form>
             </div>
         </section>
         <nav class="flex gap-2 justify-center items-center mt-2 w-40 h-14">

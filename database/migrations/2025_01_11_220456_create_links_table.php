@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
+            $table->unsignedTinyInteger('sort')->default(0);
             $table->string('title');
             $table->string('streaming');
             $table->string('url');
             $table->string('poster')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

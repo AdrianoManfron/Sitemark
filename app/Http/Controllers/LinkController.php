@@ -3,37 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Link;
+use App\Models\User;
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 
 class LinkController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('links.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreLinkRequest $request)
     {
-        Link::query()->create(
-            $request->validated()
-        );
+        /** @var User $user */
+        $user = auth()->user();
+
+        $user->links()
+            ->create($request->validated());
 
         return to_route('dashboard');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Link $link)
-    {
-        //
     }
 
     /**
@@ -41,7 +28,7 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
-        //
+        return view('links.edit', compact('link'));
     }
 
     /**
@@ -49,7 +36,16 @@ class LinkController extends Controller
      */
     public function update(UpdateLinkRequest $request, Link $link)
     {
-        //
+        $data = $request->validated();
+
+        if ($file = $request->poster) {
+            $data['poster'] = $file->store('poster');
+        }
+
+        $link->fill($data)->save();
+
+        return to_route('dashboard')
+            ->with('message', 'Atualizado com sucesso!!');
     }
 
     /**
@@ -57,6 +53,23 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
-        //
+        $link->delete();
+
+        return to_route('dashboard')
+            ->with('message', 'Deletado com sucesso!!');
+    }
+
+    public function up(Link $link)
+    {
+        $link->moveUp();
+
+        return back();
+    }
+
+    public function down(Link $link)
+    {
+        $link->moveDown();
+
+        return back();
     }
 }
